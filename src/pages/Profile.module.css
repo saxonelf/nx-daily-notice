@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+
+    :global(.ant-space-item) {
+        width: 100%;
+    }
+}
+
+.configCard {
+    width: 100%;
+    margin: 6px;
+}
+
+.fullwidth {
+    width: 100%;
+
+    & > :global(.ant-select) {
+        width: 100%;
+    }
+}
+
+.btnContainer {
+    width: 100%;
+    display: inline-flex;
+    place-content: center;
+    & > button {
+        width: 48%;
+    }
+}
