@@ -1,12 +1,11 @@
-
-export const API_URL = '';
+export const API_URL = 'https://dailynotice-backend.vercel.app';
 export const authCodeEndpoint = '/auth_code';
 export const verifyCodeEndpoint = '/verify_auth_code';
 export const noticeProfileEndpoint = '/notice_profile';
 
 export async function getAuthCode(type, account) {
     try {
-        const data = await fetch(API_URL + authCodeEndpoint, {
+        const resp = await fetch(API_URL + authCodeEndpoint, {
             method: 'POST',
             body: JSON.stringify({
                 type,
@@ -17,9 +16,13 @@ export async function getAuthCode(type, account) {
             }
         });
 
-        if (data.error) {
-            throw data.error;
+        if (!resp.ok) {
+            throw 'Something wrong';
         } else {
+            const data = await resp.json();
+            if (data.error) {
+                throw data.error;
+            }
             return data;
         }
     } catch(e) {
@@ -29,7 +32,7 @@ export async function getAuthCode(type, account) {
 
 export async function verifyAuthCode(type, account, fullname, sessionId, authCode) {
     try {
-        const data = await fetch(API_URL + verify_auth_code, {
+        const resp = await fetch(API_URL + verifyCodeEndpoint, {
             method: 'POST',
             body: JSON.stringify({
                 type,
@@ -43,9 +46,13 @@ export async function verifyAuthCode(type, account, fullname, sessionId, authCod
             }
         });
 
-        if (data.error) {
-            throw data.error;
+        if (!resp.ok) {
+            throw 'Something wrong';
         } else {
+            const data = await resp.json();
+            if (data.error) {
+                throw data.error;
+            }
             return data;
         }
     } catch(e) {
@@ -55,20 +62,20 @@ export async function verifyAuthCode(type, account, fullname, sessionId, authCod
 
 export async function getUserNoticeProfile(account, userToken) {
     try {
-        const data = await fetch(API_URL + noticeProfileEndpoint, {
+        const resp = await fetch(API_URL + noticeProfileEndpoint, {
             method: 'GET',
-            body: JSON.stringify({
-                account
-            }),
             headers: {
                 'content-type': 'application/json',
                 'authorization': 'Bearer ' + userToken
             }
         });
-
-        if (data.error) {
-            throw data.error;
+        if (!resp.ok) {
+            throw 'Something wrong';
         } else {
+            const data = await resp.json();
+            if (data.error) {
+                throw data.error;
+            }
             return data;
         }
     } catch(e) {
@@ -78,7 +85,7 @@ export async function getUserNoticeProfile(account, userToken) {
 
 export async function updateUserNoticeProfile(account, userToken, userProfile) {
     try {
-        const data = await fetch(API_URL + noticeProfileEndpoint, {
+        const resp = await fetch(API_URL + noticeProfileEndpoint, {
             method: 'POST',
             body: JSON.stringify({
                 account,
@@ -90,9 +97,13 @@ export async function updateUserNoticeProfile(account, userToken, userProfile) {
             }
         });
 
-        if (data.error) {
-            throw data.error;
+        if (!resp.ok) {
+            throw 'Something wrong';
         } else {
+            const data = await resp.json();
+            if (data.error) {
+                throw data.error;
+            }
             return data;
         }
     } catch(e) {

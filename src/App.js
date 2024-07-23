@@ -52,7 +52,7 @@ function App() {
         storedUserInfo.lastUpdated = new Date().toString();
         setUserInfo(storedUserInfo);
       } else {
-        localStorage.setItem("userInfo", {
+        localStorage.setItem("userInfo", JSON.stringify({
           userLoggedIn: false,
           userAuthCode: null,
           userFullname: null,
@@ -62,7 +62,7 @@ function App() {
           userAPIToken: null,
           lastError: null,
           lastUpdated: new Date().toString()
-        })
+        }));
       }
       
     }
